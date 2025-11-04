@@ -25,4 +25,19 @@ public class PersonDAO {
         jdbcTemplate.update("INSERT INTO people(first_name, last_name, sur_name, year) VALUES (?,?,?,?)",
                 person.getFirstName(), person.getLastName(), person.getSurName(), person.getYear());
     }
+
+    public Person showPersonById(int id) {
+        return jdbcTemplate.query("SELECT * FROM people WHERE id = ?",
+                        new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny().orElse(null);
+    }
+
+    public void editPerson(Person person) {
+        jdbcTemplate.update("UPDATE people SET first_name = ?, last_name = ?, sur_name= ?, year = ? WHERE id = ?",
+                person.getFirstName(), person.getLastName(), person.getSurName(), person.getYear(), person.getId());
+    }
+
+    public void deletePeopleById(int id) {
+        jdbcTemplate.update("DELETE FROM people WHERE id = ?", id);
+    }
 }

@@ -4,10 +4,7 @@ import org.example.library.dao.PersonDAO;
 import org.example.library.source.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/people")
@@ -34,5 +31,15 @@ public class PeopleController {
     public String savePeople(@ModelAttribute("addPerson") Person person) {
         personDAO.insertPeople(person);
         return "redirect:/people";
+    }
+
+    @GetMapping("/{id}")
+    public String showPeople(@PathVariable("id") int id, Model model) {
+        Person person = personDAO.showPersonById(id);
+        if (person != null) {
+            model.addAttribute("person", person);
+            return "people/showPerson";
+        }
+        return "redirect:/homePeople";
     }
 }
