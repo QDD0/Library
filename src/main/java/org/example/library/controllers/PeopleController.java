@@ -42,4 +42,27 @@ public class PeopleController {
         }
         return "redirect:/homePeople";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editPeople(@PathVariable("id") int id, Model model) {
+        Person person = personDAO.showPersonById(id);
+
+        if (person != null) {
+            model.addAttribute("person", person);
+            return "people/editPerson";
+        }
+        return "redirect:/homePeople";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updatePeople(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
+        personDAO.editPerson(id, person);
+        return "redirect:/people";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deletePeople(@PathVariable("id") int id) {
+        personDAO.deletePeopleById(id);
+        return "redirect:/people";
+    }
 }

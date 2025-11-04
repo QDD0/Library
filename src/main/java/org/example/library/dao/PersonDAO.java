@@ -32,9 +32,9 @@ public class PersonDAO {
                 .stream().findAny().orElse(null);
     }
 
-    public void editPerson(Person person) {
+    public void editPerson(int id, Person person) {
         jdbcTemplate.update("UPDATE people SET first_name = ?, last_name = ?, sur_name= ?, year = ? WHERE id = ?",
-                person.getFirstName(), person.getLastName(), person.getSurName(), person.getYear(), person.getId());
+                person.getFirstName(), person.getLastName(), person.getSurName(), person.getYear(), person.getId(), id);
     }
 
     public void deletePeopleById(int id) {

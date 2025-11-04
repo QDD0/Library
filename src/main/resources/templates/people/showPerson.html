@@ -16,5 +16,7 @@
 </div>
 <a th:href="@{/people}">Вернуться назад</a>
 <a th:href="@{/people/{id}/edit(id=${person.id})}">Редактировать</a>
-</body>
+<form th:action="@{/people/{id}/delete(id=${person.id})}" method="post" style="display: inline;">
+    <button type="submit">Delete</button>
+</form></body>
 </html>
