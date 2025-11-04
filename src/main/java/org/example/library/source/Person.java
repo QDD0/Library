@@ -43,11 +43,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getSureName() {
+    public String getSurName() {
         return surName;
     }
 
-    public void setSureName(String sureName) {
+    public void setSurName(String sureName) {
         this.surName = sureName;
     }
 

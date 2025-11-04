@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/people}" th:object="${addPerson}">
+    <input type="text" th:field="*{firstName}"><br>
+    <input type="text" th:field="*{lastName}"><br>
+    <input type="text" th:field="*{surName}"><br>
+    <input type="text" th:field="*{year}"> <br>
+
+    <input type="submit" value="create">
+</form>
+<a th:href="@{/people}">Вернуться назад</a>
+
+</body>
+</html>
