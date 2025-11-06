@@ -2,19 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>People Management</title>
+    <link rel="stylesheet" th:href="@{/css/stylePeople.css}">
 </head>
 <body>
-<h1>Test People</h1>
-<div th:each="person : ${peopleList}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}">
-        <p th:text="'first: ' + ${person.getFirstName()}">first</p>
-        <p th:text="'first: ' + ${person.getLastName()}">first</p>
-        <p th:text="'first: ' + ${person.getSurName()}">first</p>
-        <p th:text="'first: ' + ${person.getYear()}">first</p>
-    </a> <br>
+<h1>👥 Управление персоналом</h1>
+
+<div class="people-count" th:text="'Total people: ' + ${#lists.size(peopleList)}">Количество: 0</div>
+
+<div class="action-links">
+    <a th:href="@{/people/addPerson}" class="action-btn add">
+        <span>➕</span>
+        Добавить
+    </a>
+    <a th:href="@{/books}" class="action-btn books">
+        <span>📚</span>
+        Раздел книг
+    </a>
 </div>
-<a th:href="@{/people/addPerson}"> Добавить пользователя </a> <br>
-<a th:href="@{/books}">Перейти в раздел книги</a>
+
+<div class="people-grid">
+    <div th:each="person : ${peopleList}" class="person-card">
+        <a th:href="@{/people/{id}(id=${person.getId()})}">
+            <div class="person-info">
+                <span class="info-label">Имя:</span>
+                <span class="info-value" th:text="${person.getFirstName()}">First</span>
+            </div>
+            <div class="person-info">
+                <span class="info-label">Отчество:</span>
+                <span class="info-value" th:text="${person.getLastName()}">Last</span>
+            </div>
+            <div class="person-info">
+                <span class="info-label">Фамилия:</span>
+                <span class="info-value" th:text="${person.getSurName()}">Surname</span>
+            </div>
+            <div class="person-info">
+                <span class="info-label">Год:</span>
+                <span class="info-value" th:text="${person.getYear()}">Year</span>
+            </div>
+        </a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(peopleList)}" class="empty-state">
+        <div class="icon">👥</div>
+        <h3>Не найдено</h3>
+        <p>Добавьте своего первого человека, чтобы начать</p>
+    </div>
+</div>
 </body>
 </html>
