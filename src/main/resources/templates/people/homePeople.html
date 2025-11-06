@@ -5,15 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Test People</h1>
-    <div th:each="person : ${peopleList}">
-        <a th:href="@{/people/{id}(id=${person.getId()})}">
-            <p th:text="'first: ' + ${person.getFirstName()}">first</p>
-            <p th:text="'first: ' + ${person.getLastName()}">first</p>
-            <p th:text="'first: ' + ${person.getSurName()}">first</p>
-            <p th:text="'first: ' + ${person.getYear()}">first</p>
-        </a> <br>
-    </div>
-    <a th:href="@{/people/addPerson}"> add person </a>
+<h1>Test People</h1>
+<div th:each="person : ${peopleList}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}">
+        <p th:text="'first: ' + ${person.getFirstName()}">first</p>
+        <p th:text="'first: ' + ${person.getLastName()}">first</p>
+        <p th:text="'first: ' + ${person.getSurName()}">first</p>
+        <p th:text="'first: ' + ${person.getYear()}">first</p>
+    </a> <br>
+</div>
+<a th:href="@{/people/addPerson}"> Добавить пользователя </a> <br>
+<a th:href="@{/books}">Перейти в раздел книги</a>
 </body>
 </html>

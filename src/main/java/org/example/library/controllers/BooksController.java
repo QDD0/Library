@@ -21,6 +21,6 @@ public class BooksController {
     @GetMapping("")
     public String showAllBooks(Model model) {
         model.addAttribute("booksList", bookDAO.showAllBooks());
-        return "book/homeBooks";
+        return "books/homeBooks";
     }
 }

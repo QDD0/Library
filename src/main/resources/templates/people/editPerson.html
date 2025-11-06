@@ -7,19 +7,19 @@
 <body>
 <form th:action="@{/people/{id}/update(id=${person.id})}" method="post">
     <label for="first">firs:</label>
-    <input type="text" id="first" name="name" th:value="${person.firstName}" required>
+    <input type="text" id="first" name="firstName" th:value="${person.firstName}" required>
     <br>
 
     <label for="last">last:</label>
-    <input type="text" id="last" name="age" th:value="${person.lastName}" required>
+    <input type="text" id="last" name="lastName" th:value="${person.lastName}" required>
     <br>
 
     <label for="sur">sur:</label>
-    <input type="text" id="sur" name="email" th:value="${person.surName}" required>
+    <input type="text" id="sur" name="surName" th:value="${person.surName}" required>
     <br>
 
     <label for="year">year:</label>
-    <input type="text" id="year" name="email" th:value="${person.year}" required>
+    <input type="text" id="year" name="year" th:value="${person.year}" required>
     <br>
 
     <button type="submit">Update</button>
