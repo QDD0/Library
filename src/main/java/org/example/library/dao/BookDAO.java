@@ -34,4 +34,14 @@ public class BookDAO {
     public void updateBookOwner(int bookId, Integer personId) {
         jdbcTemplate.update("UPDATE books SET id_person = ? WHERE id = ?", personId, bookId);
     }
+
+    public void editBookAuthor(int id, Book books) {
+        jdbcTemplate.update("UPDATE books SET title= ? ,first_name_author =?,last_name_author= ?, sur_name_author=?, year=? WHERE id = ?  ",
+                books.getTitle(), books.getFirstNameAuthor(), books.getLastNameAuthor(), books.getSurNameAuthor(), books.getYear(), id);
+    }
+
+    public void deleteBookById(int id) {
+        jdbcTemplate.update("DELETE FROM books WHERE id = ?", id);
+    }
+
 }

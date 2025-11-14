@@ -52,7 +52,7 @@ public class BooksController {
             model.addAttribute("book", book);
             return "books/showBook";
         }
-        return  "redirect:/books";
+        return "redirect:/books";
     }
 
     @PostMapping("/{id}/assign")
@@ -60,5 +60,28 @@ public class BooksController {
                              @RequestParam("personId") Integer personId) {
         bookDAO.updateBookOwner(bookId, personId);
         return "redirect:/books/" + bookId;
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editBook(@PathVariable("id") int id, Model model) {
+        Book book = bookDAO.showBookById(id);
+
+        if (book != null) {
+            model.addAttribute("book", book);
+            return "books/editBook";
+        }
+        return "redirect:/books";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateBook(@PathVariable("id") int id, @ModelAttribute("book") Book book) {
+        bookDAO.editBookAuthor(id, book);
+        return "redirect:/books";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteBook(@PathVariable("id") int id) {
+        bookDAO.deleteBookById(id);
+        return "redirect:/books";
     }
 }

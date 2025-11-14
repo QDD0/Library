@@ -209,10 +209,10 @@
     </form>
 
     <div class="actions">
-        <a th:href="@{/books}" class="action-link back-link">← Назад</a>
-        <a th:href="@{/books/{id}/edit(id=${book.id})}" class="action-link edit-link">✏ Редактировать</a>
+        <a th:href="@{/books}" class="action-link back-link">Назад</a>
+        <a th:href="@{/books/{id}/edit(id=${book.id})}" class="action-link edit-link">Редактировать</a>
         <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" style="display:inline;">
-            <button type="submit" class="delete-btn">🗑 Удалить</button>
+            <button type="submit" class="delete-btn">Удалить</button>
         </form>
     </div>
 </div>

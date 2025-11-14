@@ -25,6 +25,10 @@
     <div th:each="book : ${booksList}" class="book-card">
         <a th:href="@{/books/{id}(id=${book.id})}">
             <div class="book-info">
+                <span class="info-label">Название:</span>
+                <span class="info-value" th:text="${book.title}">Title</span>
+            </div>
+            <div class="book-info">
                 <span class="info-label">Имя:</span>
                 <span class="info-value" th:text="${book.firstNameAuthor}">First</span>
             </div>
