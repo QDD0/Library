@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Person</title>
+    <title>Добавить книгу</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,7 +18,7 @@
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #9b59b6;
             letter-spacing: 1px;
         }
 
@@ -27,7 +27,7 @@
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-top: 4px solid #3498db;
+            border-top: 4px solid #9b59b6;
             margin-bottom: 20px;
             animation: fadeInUp 0.6s ease;
         }
@@ -68,7 +68,7 @@
 
         .form-input:focus {
             outline: none;
-            border-color: #3498db;
+            border-color: #9b59b6;
             background-color: white;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
@@ -123,65 +123,73 @@
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
 
-        .form-input:valid {
-            border-color: #27ae60;
-        }
-
         .form-icon {
             margin-right: 8px;
             font-size: 1.1em;
         }
+
+        .author-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
     </style>
 </head>
 <body>
-<h1>👤 Add New Person</h1>
+<h1>📚 Добавить новую книгу</h1>
 
 <div class="form-card">
-    <form th:method="POST" th:action="@{/people}" th:object="${addPerson}">
+    <form th:method="POST" th:action="@{/books}" th:object="${addBook}">
         <div class="form-group">
             <label class="form-label">
                 <span class="form-icon"></span>
-                First Name:
+                Название книги:
             </label>
-            <input type="text" th:field="*{firstName}" class="form-input" placeholder="Enter first name" required>
+            <input type="text" th:field="*{title}" class="form-input" placeholder="Введите название книги" required>
         </div>
 
         <div class="form-group">
             <label class="form-label">
                 <span class="form-icon"></span>
-                Last Name:
+                Информация об авторе:
             </label>
-            <input type="text" th:field="*{lastName}" class="form-input" placeholder="Enter last name" required>
+            <div class="author-fields">
+                <div>
+                    <input type="text" th:field="*{firstNameAuthor}" class="form-input" placeholder="Имя автора" required>
+                </div>
+                <div>
+                    <input type="text" th:field="*{lastNameAuthor}" class="form-input" placeholder="Фамилия автора" required>
+                </div>
+                <div class="full-width">
+                    <input type="text" th:field="*{surNameAuthor}" class="form-input" placeholder="Отчество автора">
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
             <label class="form-label">
                 <span class="form-icon"></span>
-                Surname:
+                Год издания:
             </label>
-            <input type="text" th:field="*{surName}" class="form-input" placeholder="Enter surname" required>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">
-                <span class="form-icon"></span>
-                Year:
-            </label>
-            <input type="number" th:field="*{year}" class="form-input" placeholder="Enter birth year"
-                   min="1900" max="2024" required>
+            <input type="number" th:field="*{year}" class="form-input" placeholder="Введите год издания"
+                   min="1000" max="2025" required>
         </div>
 
         <button type="submit" class="submit-btn">
             <span>➕</span>
-            Create Person
+            Создать книгу
         </button>
     </form>
 </div>
 
 <div style="text-align: center;">
-    <a th:href="@{/people}" class="back-link">
+    <a th:href="@{/books}" class="back-link">
         <span>←</span>
-        Back to People List
+        Вернуться к списку книг
     </a>
 </div>
 </body>

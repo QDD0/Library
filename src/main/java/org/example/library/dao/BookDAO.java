@@ -20,4 +20,18 @@ public class BookDAO {
     public List<Book> showAllBooks() {
         return jdbcTemplate.query("SELECT * FROM books", new BeanPropertyRowMapper<>(Book.class));
     }
+
+    public void insertBook(Book book) {
+        jdbcTemplate.update("INSERT INTO books(title, first_name_author,last_name_author, sur_name_author, year ) VALUES (?,?,?,?,?)",
+                book.getTitle(), book.getFirstNameAuthor(), book.getLastNameAuthor(), book.getSurNameAuthor(), book.getYear());
+    }
+
+    public Book showBookById(int id) {
+        return jdbcTemplate.query("SELECT * FROM books WHERE id = ?", new Object[]{id},
+                new BeanPropertyRowMapper<>(Book.class)).stream().findAny().orElse(null);
+    }
+
+    public void updateBookOwner(int bookId, Integer personId) {
+        jdbcTemplate.update("UPDATE books SET id_person = ? WHERE id = ?", personId, bookId);
+    }
 }

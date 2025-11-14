@@ -7,6 +7,7 @@ public class Book {
     private String lastNameAuthor;
     private String surNameAuthor;
     private Integer year;
+    private Integer idPerson;
 
     public Book() {
     }
@@ -18,6 +19,14 @@ public class Book {
         this.lastNameAuthor = lastNameAuthor;
         this.surNameAuthor = surNameAuthor;
         this.year = year;
+    }
+
+    public Integer getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
     }
 
     public Integer getId() {
