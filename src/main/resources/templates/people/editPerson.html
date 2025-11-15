@@ -1,29 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Редактировать человека</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .edit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border-top: 5px solid #3498db;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-input:hover {
+            border-color: #bdc3c7;
+        }
+
+        .form-input:invalid {
+            border-color: #e74c3c;
+        }
+
+        .form-input:valid {
+            border-color: #27ae60;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #219a52, #27ae60);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            padding: 12px 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .back-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .form-icon {
+            font-size: 1.1em;
+        }
+    </style>
 </head>
 <body>
-<form th:action="@{/people/{id}/update(id=${person.id})}" method="post">
-    <label for="first">firs:</label>
-    <input type="text" id="first" name="firstName" th:value="${person.firstName}" required>
-    <br>
+<div class="container">
+    <div class="header">
+        <h1>✏️ Редактировать человека</h1>
+        <p>Обновите информацию о человеке</p>
+    </div>
 
-    <label for="last">last:</label>
-    <input type="text" id="last" name="lastName" th:value="${person.lastName}" required>
-    <br>
+    <div class="edit-card">
+        <form th:action="@{/people/{id}/update(id=${person.id})}" method="post">
+            <div class="form-group">
+                <label class="form-label" for="first">
+                    <span class="form-icon"></span>
+                    Имя:
+                </label>
+                <input type="text" id="first" name="firstName" th:value="${person.firstName}" class="form-input" placeholder="Введите имя" required>
+            </div>
 
-    <label for="sur">sur:</label>
-    <input type="text" id="sur" name="surName" th:value="${person.surName}" required>
-    <br>
+            <div class="form-group">
+                <label class="form-label" for="last">
+                    <span class="form-icon"></span>
+                    Фамилия:
+                </label>
+                <input type="text" id="last" name="lastName" th:value="${person.lastName}" class="form-input" placeholder="Введите фамилию" required>
+            </div>
 
-    <label for="year">year:</label>
-    <input type="text" id="year" name="year" th:value="${person.year}" required>
-    <br>
+            <div class="form-group">
+                <label class="form-label" for="sur">
+                    <span class="form-icon"></span>
+                    Отчество:
+                </label>
+                <input type="text" id="sur" name="surName" th:value="${person.surName}" class="form-input" placeholder="Введите отчество" required>
+            </div>
 
-    <button type="submit">Update</button>
-</form>
-<a th:href="@{/people}">Вернуться назад</a>
+            <div class="form-group">
+                <label class="form-label" for="year">
+                    <span class="form-icon"></span>
+                    Год рождения:
+                </label>
+                <input type="number" id="year" name="year" th:value="${person.year}" class="form-input" placeholder="Введите год рождения" min="1900" max="2024" required>
+            </div>
+
+            <button type="submit" class="btn submit-btn">
+                <span class="form-icon"></span>
+                Обновить данные
+            </button>
+        </form>
+    </div>
+
+    <div class="action-buttons">
+        <a th:href="@{/people}" class="btn back-link">
+            <span class="form-icon">←</span>
+            Вернуться к списку
+        </a>
+    </div>
+</div>
 </body>
 </html>

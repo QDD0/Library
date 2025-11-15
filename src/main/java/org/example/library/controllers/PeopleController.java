@@ -1,18 +1,26 @@
 package org.example.library.controllers;
 
 import org.example.library.dao.PersonDAO;
+import org.example.library.service.BookService;
+import org.example.library.source.Book;
 import org.example.library.source.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
     private PersonDAO personDAO;
+    private BookService bookService;
 
-    public PeopleController(PersonDAO personDAO) {
+    @Autowired
+    public PeopleController(PersonDAO personDAO, BookService bookService) {
         this.personDAO = personDAO;
+        this.bookService = bookService;
     }
 
     @GetMapping("")
@@ -36,6 +44,9 @@ public class PeopleController {
     @GetMapping("/{id}")
     public String showPeople(@PathVariable("id") int id, Model model) {
         Person person = personDAO.showPersonById(id);
+        List<Book> bookList = bookService.showBooks(id);
+        model.addAttribute("bookList", bookList);
+
         if (person != null) {
             model.addAttribute("person", person);
             return "people/showPerson";

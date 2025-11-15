@@ -6,6 +6,7 @@ public class Person {
     private String lastName;
     private String surName;
     private Integer year;
+    private Integer idPerson;
 
     public Person() {
 
@@ -21,6 +22,14 @@ public class Person {
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
     }
 
     public void setId(Integer id) {
